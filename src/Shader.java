@@ -32,16 +32,17 @@ import javax.swing.Timer;
 
 	public class Shader  extends JPanel{
 		boolean drawn = false;
+		boolean flag = true;
+		int nanotime = (int) System.nanoTime();
 		long a = System.currentTimeMillis();
+		static boolean out = false;
 		static int x =1600;//1000
 		static int y = 900;//600
 		static int u = 1;
 		static int t = 0;
+		static int DELAY = 500;		
 		static String[] buttons = { "Yes", "No" };
-		static boolean out = false;
-		static int DELAY = 500;
-		
-		int nanotime = (int) System.nanoTime();
+
 		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		String date = (df.format(new Date()));
 		String filename = "E:/Shader/";
@@ -101,15 +102,15 @@ import javax.swing.Timer;
 				}
 			}
 			
-			
-//			 try {
-//				ImageIO.write(bi, "jpg", file);
-//				drawn = true;
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//
-//			}
+			if(flag)
+			 try {
+				ImageIO.write(bi, "jpg", file);
+				drawn = true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
+			}
 			//toFile();
 }
 
@@ -128,7 +129,7 @@ import javax.swing.Timer;
 			B += (int) (100*Math.sin(Math.sqrt(j+1000)));
 			
 			B = Math.abs(B);
-			return B%200;
+			return B%255;
 			
 		}
 		
@@ -142,10 +143,10 @@ import javax.swing.Timer;
 
 			int Xcord = (x/2 - i);
 			int Ycord = y/2 - j;
-			int B = +(int) (100*Math.sin(Math.sqrt(i+1000)+Math.PI/3));
-			B -= (int) (100*(Math.sin(Math.sqrt(j+1000)*Math.PI/3)));
+			int B = +(int) (100*Math.sin(Math.sqrt(i+1000)+Math.PI*4/3));
+			B -= (int) (100*(Math.sin(Math.sqrt(j+1000)-Math.PI*2/3)));
 			B = Math.abs(B);
-			return B%200;
+			return B%255;
 			}
 		
 		/**
@@ -157,11 +158,11 @@ import javax.swing.Timer;
 		int BL(int i, int j) {
 			int Xcord = (x/2 - i);
 			int Ycord = y/2 - j;
-			int B = +(int) (100*Math.sin(Math.sqrt(i+1000)-Math.PI/3));
-			B -= (int) (100*Math.sin(Math.sqrt(j+1000)-Math.PI/3));
+			int B = +(int) (100*Math.sin(Math.sqrt(i+1000)+Math.PI*2/3));
+			B -= (int) (100*Math.sin(Math.sqrt(j+1000)-Math.PI*2/3));
 			
 			B = Math.abs(B);
-			return B%200;
+			return B%255;
 		}
 		
 
